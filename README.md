@@ -55,15 +55,19 @@ Limitations & Possible Improvements
 - Additional features such as head-to-head records, fatigue (matches played in recent days) or Elo ratings could raise the ceiling
 
 Project Structure: 
-├── DataPreprocessing.R                  # Filtering, cleaning, player assignment
-├── Statlearn_TennisClassification.R     # Feature engineering, models, evaluation
-├── Step1/                               # <describe>
-├── Step2/                               # <describe>
-├── Step3/                               # <describe>
+├── 01_preprocessing/                    # Step 1: cleaning, restructuring, match-level features
+│   ├── DataPreprocessing_Step1.R        #   filtering (2000–2020, hard court), player assignment, NaN removal
+│   ├── CsvRestructuring.R               #   column reordering, chronological sorting
+│   └── FeatureEngineering_Step1.R       #   per-opportunity rates, difference & ranking features
+├── 02_historical_features/              # Step 2: rolling averages over the previous 10 matches
+│   └── FE_Step2_Historical.R
+├── 03_filtering_scaling/                # Step 3: final dataset
+│   ├── FE_Step3_FilterFirstGames.R      #   remove matches without player history
+│   └── FE_Scaling.R                     #   70/30 split, standardization fitted on training data
 ├── Models/                              # <describe>
+├── Statlearn_TennisClassification.R     # Model training, tuning and evaluation
 ├── Visuals/                             # Figures (ROC curves, feature importance, distributions)
-└── Docu/                                # Project report
-
+└── Docs/                                # Project report
 
 How to Run
 1. Download the ATP matches data (see Data) and place it in the project root
